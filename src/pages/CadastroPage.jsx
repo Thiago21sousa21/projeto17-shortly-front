@@ -1,7 +1,6 @@
 import { styled } from "styled-components";
 import { Header } from "../components/outPages/Header";
 import  logo from './../assets/logoShortly.svg'
-import  trofeu from './../assets/trofeu.svg'
 
 
 

@@ -2,9 +2,23 @@ import { styled } from "styled-components"
 import  logo from './../assets/logoShortly.svg'
 import  trofeu from './../assets/trofeu.svg'
 import { Header } from "../components/outPages/Header";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export function InitialPage(){
-    
+    const [ranking, setRanking] = useState('carregando...')
+
+    useEffect(()=>{
+        axios.get(`${import.meta.env.VITE_API_URL}/ranking`)
+            .then(res=>{
+                setRanking(res.data);
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+    },[]);
+    if(ranking === 'carregando...')return ranking;
+
     return(
         <CsInitialPage>
             <Header/>
@@ -14,8 +28,18 @@ export function InitialPage(){
                     <img src={trofeu} />Ranking
                 </div>
                 <div className="playersRanking">
-                    <p>1. Fulaninha - 32 links - 1.000 visualizações</p>
-                    
+                    {ranking.map((player, idx) => {
+                        const {name, linksCount, visitCount, id} = player;
+                        if(Number(visitCount) !== 0){
+                            return(
+                                <p key={id}>{idx + 1}. {name} - {linksCount} 
+                                    {linksCount > 1? ' links': ' link'} - {visitCount} 
+                                    {visitCount > 1? ' visualizações': ' visualização'}
+                                </p>
+                            );
+                        }                                                 
+                    })}
+                                     
                 </div>
             </div>
             <h2>Crie sua conta para usar nosso serviço! </h2>            
