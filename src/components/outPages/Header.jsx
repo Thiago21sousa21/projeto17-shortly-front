@@ -5,7 +5,10 @@ export function Header(){
     return(
         <CsHeader>            
             <div className="entrar">Entrar</div>
-            <div className="cadastre-se">Cadastre-se</div>
+            <div className="cadastre-se">Cadastrar-se</div>
+            <div className="home">Home</div>
+            <div className="ranking">Ranking</div>
+            <div className="sair">Sair</div>
         </CsHeader>
     );
 }
@@ -27,10 +30,21 @@ const CsHeader = styled.div`
 
     .entrar{
         color:#5D9040;
-        margin-right: 10px;
     }
     .cadastre-se{
         color:#9C9C9C;
-       
+        margin-left: 10px;       
+    }
+    .home{
+        color:#9C9C9C;
+        margin-left: 10px;       
+    }
+    .ranking{
+        color:#9C9C9C;
+        margin-left: 10px;       
+    }
+    .sair{
+        color:#9C9C9C;
+        margin-left: 10px;       
     }
 `;

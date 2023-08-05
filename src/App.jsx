@@ -13,16 +13,17 @@ function App() {
     <CsApp>
       <BrowserRouter>
 
-        <Header/>
+        {/* <Header/> */}
 
         <Routes>
 
           <Route path="/" element={<InitialPage/>}/>
-          <Route path="/home" element={<CadastroPage/>}/>
-          <Route path="/cadastro" element={<LoginPage/>}/>
-          <Route path="/login" element={<HomePage/>}/>
+          <Route path="/home" element={<HomePage/>}/>
+          <Route path="/cadastro" element={<CadastroPage/>}/>
+          <Route path="/login" element={<LoginPage/>}/>
           <Route path="/ranking" element={<RankingPage/>}/>
-
+          
+          
         </Routes>
       </BrowserRouter>       
     </CsApp>
