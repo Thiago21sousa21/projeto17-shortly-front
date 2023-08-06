@@ -1,23 +1,45 @@
 import { styled } from "styled-components";
 import { Header } from "../components/outPages/Header";
 import  logo from './../assets/logoShortly.svg'
+import { useState } from "react";
+import { postNewClient } from "../utils/requestsUtils";
 
 
 
 export function CadastroPage(){
+const [formNewClient, setFormNewClient] = useState({name:'', email:'', password:'', confirmPassword: ''})
+
+const updateFormNewClient = (e)=>{
+    const {id, value} = e.target;
+    const newForm = {...formNewClient, [id]: value};
+    setFormNewClient(newForm);
+}
+
+    const sendNewClient = (e)=>{
+        e.preventDefault();
+        postNewClient(formNewClient);
+    }
     
     return(
         <CsCadastroPage>
             <Header/>
             <img className="logo" src={logo}/>
-            <form onSubmit="">
+            <form onSubmit={sendNewClient}>
                     <input type="text" name="name" id="name" 
+                        onChange={updateFormNewClient}
+                        value={formNewClient['name']}
                         placeholder="Nome"/>
                     <input type="email" name="email" id="email" 
+                        onChange={updateFormNewClient}
+                        value={formNewClient['email']}
                         placeholder="Email"/>
                     <input type="password" name="password" id="password" 
+                        onChange={updateFormNewClient}
+                        value={formNewClient['password']}
                         placeholder="Senha"/>
-                    <input type="password" name="password" id="password" 
+                    <input type="password" name="password" id="confirmPassword" 
+                        onChange={updateFormNewClient}
+                        value={formNewClient['confirmPassword']}
                         placeholder="Confirme a senha"/>
                     <button>Criar Conta</button>
             </form>

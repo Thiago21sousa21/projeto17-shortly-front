@@ -1,23 +1,43 @@
 import { styled } from "styled-components";
 import { Header } from "../components/outPages/Header";
-import  logo from './../assets/logoShortly.svg'
+import logo from './../assets/logoShortly.svg'
+import { postFormLogin } from "../utils/requestsUtils";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 
-export function LoginPage(){
-    
-    return(
+export function LoginPage() {
+    const [formLogin, setFormLogin] = useState({ email: '', password: ''});
+    const navigate = useNavigate();
+
+    const updateFormLogin = (e) => {
+        const { id, value } = e.target;
+        const newForm = { ...formLogin, [id]: value };
+        setFormLogin(newForm);
+    }
+
+    const sendFormLogin = (e) => {
+        e.preventDefault();
+        postFormLogin(formLogin, navigate);
+    }
+
+    return (
         <CsLoginPage>
-            <Header/>
-            <img className="logo" src={logo}/>
-            <form onSubmit="">                    
-                    <input type="email" name="email" id="email" 
-                        placeholder="Email"/>
-                    <input type="password" name="password" id="password" 
-                        placeholder="Senha"/>                   
-                    <button>Entrar</button>
+            <Header />
+            <img className="logo" src={logo} />
+            <form onSubmit={sendFormLogin}>
+                <input type="email" name="email" id="email"
+                    onChange={updateFormLogin}
+                    value={formLogin['email']}
+                    placeholder="Email" />
+                <input type="password" name="password" id="password"
+                    onChange={updateFormLogin}
+                    value={formLogin['password']}
+                    placeholder="Senha" />
+                <button>Entrar</button>
             </form>
-            
+
         </CsLoginPage>
     );
 }

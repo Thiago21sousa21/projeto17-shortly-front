@@ -4,19 +4,11 @@ import  trofeu from './../assets/trofeu.svg'
 import { Header } from "../components/outPages/Header";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { getRanking } from "../utils/requestsUtils";
 
 export function InitialPage(){
     const [ranking, setRanking] = useState('carregando...')
-
-    useEffect(()=>{
-        axios.get(`${import.meta.env.VITE_API_URL}/ranking`)
-            .then(res=>{
-                setRanking(res.data);
-            })
-            .catch(err=>{
-                console.log(err);
-            })
-    },[]);
+    getRanking(setRanking); 
     if(ranking === 'carregando...')return ranking;
 
     return(

@@ -1,13 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
 export function Header(){
+    const navigate = useNavigate();
     
     return(
         <CsHeader>            
-            <div className="entrar">Entrar</div>
-            <div className="cadastre-se">Cadastrar-se</div>
-            <div className="home">Home</div>
-            <div className="ranking">Ranking</div>
+            <div className="entrar" onClick={()=>navigate('/login')}>Entrar</div>
+            <div className="cadastre-se" onClick={()=>navigate('/cadastro')}>Cadastrar-se</div>
+            <div className="home" onClick={()=>navigate('/home')}>Home</div>
+            <div className="ranking" onClick={()=>navigate('/ranking')}>Ranking</div>
             <div className="sair">Sair</div>
         </CsHeader>
     );
