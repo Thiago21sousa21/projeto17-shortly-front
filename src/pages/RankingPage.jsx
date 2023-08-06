@@ -8,8 +8,8 @@ export function RankingPage(){
     
     return(
         <CsRankingPage>
-            <Header/>
-             <img className="logo" src={logo}/>
+            
+            <img className="logo" src={logo}/>
             <div className="containerMain">
                 <div className="titleRanking">
                     <img src={trofeu} />Ranking

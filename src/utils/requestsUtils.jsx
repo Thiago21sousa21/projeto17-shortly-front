@@ -1,18 +1,14 @@
 import axios from "axios";
-import { useEffect } from "react";
-
 
 
 export const getRanking = (setRanking) => {
-    useEffect(()=>{
-        axios.get(`${import.meta.env.VITE_API_URL}/ranking`)
-            .then(res=>{
-                setRanking(res.data);
-            })
-            .catch(err=>{
-                console.log(err);
-            })
-    },[]);
+    axios.get(`${import.meta.env.VITE_API_URL}/ranking`)
+    .then(res=>{
+        setRanking(res.data);
+    })
+    .catch(err=>{
+        console.log(err);
+    })
 }
 
 export const postNewClient = (formNewClient) => {    
@@ -37,4 +33,17 @@ export const postFormLogin = (formLogin, navigate, context) => {
             console.log(err);
         })
  
+}
+
+export const getMyUrls = (config, setMyUrls) => {   
+
+    axios.get(`${import.meta.env.VITE_API_URL}/users/me`, config)
+    .then(res => {
+        console.log(res.data);
+        setMyUrls(res.data.shortenedUrls)
+    })
+    .catch(err => {
+        console.log(err);
+    })
+
 }

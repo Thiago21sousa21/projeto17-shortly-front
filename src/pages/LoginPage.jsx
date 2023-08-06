@@ -25,7 +25,7 @@ export function LoginPage() {
 
     return (
         <CsLoginPage>
-            <Header />
+            
             <img className="logo" src={logo} />
             <form onSubmit={sendFormLogin}>
                 <input type="email" name="email" id="email"

@@ -9,17 +9,20 @@ import { Header } from "./components/outPages/Header";
 import { generalContext } from "./contexts/generalContext";
 import { useState } from "react";
 
-
 function App() {
   const [ token, setToken] = useState('');
+  const [myUrls, setMyUrls] = useState([]);
+  const config = {
+    headers: {
+      authorization: `Bearer ${token}`
+    }
+  }
 
   return (
-    <generalContext.Provider value={{ token, setToken }}>
-
+    <generalContext.Provider value={{ token, setToken, config, myUrls, setMyUrls }}>
       <CsApp>
         <BrowserRouter>
-
-          {/* <Header/> */}
+          <Header/> 
 
           <Routes>
 
@@ -33,7 +36,6 @@ function App() {
           </Routes>
         </BrowserRouter>
       </CsApp>
-
     </generalContext.Provider>
 
   );

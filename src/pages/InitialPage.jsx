@@ -7,13 +7,14 @@ import axios from "axios";
 import { getRanking } from "../utils/requestsUtils";
 
 export function InitialPage(){
-    const [ranking, setRanking] = useState('carregando...')
-    getRanking(setRanking); 
+    const [ranking, setRanking] = useState('carregando...');
+    useEffect(()=>{
+        getRanking(setRanking); 
+    },[]);    
     if(ranking === 'carregando...')return ranking;
 
     return(
-        <CsInitialPage>
-            <Header/>
+        <CsInitialPage>            
             <img className="logo" src={logo}/>
             <div className="containerMain">
                 <div className="titleRanking">
