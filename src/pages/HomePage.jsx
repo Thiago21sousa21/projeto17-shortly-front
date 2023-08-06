@@ -11,9 +11,22 @@ import { getMyUrls } from "../utils/requestsUtils";
 export function HomePage() {
    
     const {config, token, myUrls, setMyUrls  } = useContext(generalContext);
-    console.log(config, token)
+    const [inputUrl, setInputUrl] = useState({url:''});
+    
     const toShorten = (e) => {
         e.preventDefault();
+        axios.post(`${import.meta.env.VITE_API_URL}/urls/shorten`, inputUrl, config)
+            .then(res=>{
+                console.log(res);
+                getMyUrls(config, setMyUrls);
+                setInputUrl({url:''})
+            }).catch(err=>console.log(err));
+
+    }
+    const updateInput = (e)=>{
+        const {value, id} = e.target;        
+        const newValue = {...inputUrl, [id]: value};    
+        setInputUrl(newValue);
     }
 
     useEffect(() => {
@@ -26,7 +39,9 @@ export function HomePage() {
             <img className="logo" src={logo} />
             <div className="containerMain">
                 <form onSubmit={toShorten} className="containerShorten">
-                    <input type="url" name="name" id="url" />
+                    <input type="url" name="url" id="url"
+                        onChange={updateInput} 
+                        value={inputUrl['url']}/>
                     <button className="shorten">Encurtar Link</button>
                 </form>
                 <div className="containerUrls">
@@ -54,7 +69,8 @@ const CsHomePage = styled.div`
     justify-content: space-between;
     align-items: center;
     .containerMain{
-        border: 1px solid ;
+        //border: 1px solid ;
+        padding: 15px;
         width: 100%;
         height: 60vh;
         display: flex;
@@ -64,19 +80,26 @@ const CsHomePage = styled.div`
 
         .containerShorten{
             width: 100%;
-            border: 1px solid ;
-            height: 11%;
+            //border: 1px solid ;
+            
+            height: 14%;
             //margin-bottom: 30px;
+            padding: 10px;
 
             display: flex;
             //flex-direction: column;
             justify-content: space-between;
             align-items: center;
             font-size: 36px;
+            border-radius: 12px;
+            overflow: hidden;
 
             input{
                 width: 70%;
                 height: 100%;
+                border-radius: 12px;
+                border:none;
+                box-shadow: rgba(0, 0, 0, 0.2) -2px 2px 8px ;
             }
 
             button{
@@ -84,11 +107,13 @@ const CsHomePage = styled.div`
                 height: 100%;
                 background-color: #5D9040;
                 color: white;
+                border:none;
+                border-radius: 12px;
             }
         }
         .containerUrls{
             width: 100%;
-            border: 1px solid ;
+            //border: 1px solid ;
             height: 80%;
             //border-radius: 20px;
            // box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;

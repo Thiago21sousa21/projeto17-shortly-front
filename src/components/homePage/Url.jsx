@@ -6,28 +6,30 @@ import { generalContext } from "../../contexts/generalContext";
 import { getMyUrls } from "../../utils/requestsUtils";
 
 export function Url(props) {
-    const {convertion} = props;
-    const {id , url, shortUrl , visitCount } = convertion;
-    const {config, setMyUrls } = useContext(generalContext);
-    
+    const { convertion } = props;
+    const { id, url, shortUrl, visitCount } = convertion;
+    const { config, setMyUrls } = useContext(generalContext);
 
 
 
-    const deleteUrl = ()=>{
-        axios.delete(`${import.meta.env.VITE_API_URL}/urls/${id}`,config)
-            .then(res =>{
+
+    const deleteUrl = () => {
+        axios.delete(`${import.meta.env.VITE_API_URL}/urls/${id}`, config)
+            .then(res => {
                 console.log(res);
                 getMyUrls(config, setMyUrls);
             }).catch(err => console.log(err));
-        }
+    }
 
     return (
         <CsUrl>
-            <div className="titlesUrls">
-                <p className="shorten">{url}</p>
-                <p className="short">{shortUrl}</p>
-                <p className="visits">Quantidade de visitantes: {visitCount}</p>
-            </div>
+            
+                <a className="titlesUrls"  href={`${import.meta.env.VITE_API_URL}/urls/open/${shortUrl}`} target="_blank" onClick={()=>getMyUrls(config, setMyUrls)}>
+                    <p className="shorten">{url}</p>
+                    <p className="short">{shortUrl}</p>
+                    <p className="visits">Quantidade de visitantes: {visitCount}</p>
+                </a>
+            
             <div className="deleteUrl" onClick={deleteUrl} >
                 <img src={bin} />
             </div>
@@ -37,7 +39,8 @@ export function Url(props) {
 
 const CsUrl = styled.div`
 
-    border: 1px solid;
+    //border: 1px solid;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
     width: 100%;                
     height: 13.2%;
     margin-bottom: 6%;
@@ -51,14 +54,19 @@ const CsUrl = styled.div`
     .titlesUrls{
         width: 85%;
         height: 100%;
-        //border: 1px solid;
+        border: none;
         background-color: #80CC74;
         padding: 3.5%;
+        
         
         display: flex;
         //flex-direction: column;
         justify-content: space-between;
-        align-items: center;
+        align-items: center;      
+        text-decoration: none;
+        color: white;
+        overflow: hidden;
+        
     }
     .deleteUrl{
         cursor: pointer;

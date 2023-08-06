@@ -39,7 +39,6 @@ export const getMyUrls = (config, setMyUrls) => {
 
     axios.get(`${import.meta.env.VITE_API_URL}/users/me`, config)
     .then(res => {
-        console.log(res.data);
         setMyUrls(res.data.shortenedUrls)
     })
     .catch(err => {
@@ -47,3 +46,4 @@ export const getMyUrls = (config, setMyUrls) => {
     })
 
 }
+
