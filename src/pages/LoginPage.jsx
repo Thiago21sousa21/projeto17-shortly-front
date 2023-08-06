@@ -2,14 +2,15 @@ import { styled } from "styled-components";
 import { Header } from "../components/outPages/Header";
 import logo from './../assets/logoShortly.svg'
 import { postFormLogin } from "../utils/requestsUtils";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { generalContext } from "../contexts/generalContext";
 
 
 export function LoginPage() {
     const [formLogin, setFormLogin] = useState({ email: '', password: ''});
     const navigate = useNavigate();
+    let context = useContext(generalContext);
 
     const updateFormLogin = (e) => {
         const { id, value } = e.target;
@@ -19,7 +20,7 @@ export function LoginPage() {
 
     const sendFormLogin = (e) => {
         e.preventDefault();
-        postFormLogin(formLogin, navigate);
+        postFormLogin(formLogin, navigate, context);
     }
 
     return (

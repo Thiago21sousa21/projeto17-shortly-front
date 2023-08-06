@@ -6,30 +6,39 @@ import { LoginPage } from "./pages/LoginPage";
 import { HomePage } from "./pages/HomePage";
 import { RankingPage } from "./pages/RankingPage";
 import { Header } from "./components/outPages/Header";
+import { generalContext } from "./contexts/generalContext";
+import { useState } from "react";
+
 
 function App() {
+  const [ token, setToken] = useState('');
 
   return (
-    <CsApp>
-      <BrowserRouter>
+    <generalContext.Provider value={{ token, setToken }}>
 
-        {/* <Header/> */}
+      <CsApp>
+        <BrowserRouter>
 
-        <Routes>
+          {/* <Header/> */}
 
-          <Route path="/" element={<InitialPage/>}/>
-          <Route path="/home" element={<HomePage/>}/>
-          <Route path="/cadastro" element={<CadastroPage/>}/>
-          <Route path="/login" element={<LoginPage/>}/>
-          <Route path="/ranking" element={<RankingPage/>}/>
-          
-          
-        </Routes>
-      </BrowserRouter>       
-    </CsApp>
+          <Routes>
+
+            <Route path="/" element={<InitialPage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/cadastro" element={<CadastroPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/ranking" element={<RankingPage />} />
+
+
+          </Routes>
+        </BrowserRouter>
+      </CsApp>
+
+    </generalContext.Provider>
+
   );
 
-  
+
 }
 
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 
 
@@ -25,14 +25,16 @@ export const postNewClient = (formNewClient) => {
             })   
 }
 
-export const postFormLogin = (formLogin, navigate) => {   
-    axios.post(`${import.meta.env.VITE_API_URL}/signin`, formLogin)
+export const postFormLogin = (formLogin, navigate, context) => {   
+   
+        axios.post(`${import.meta.env.VITE_API_URL}/signin`, formLogin)
         .then(res=>{
-            console.log(res);
-            navigate('/home');
-            
+            const {setToken} = context;
+            setToken(res.data.token);
+            navigate('/home');            
         })
         .catch(err=>{
-            console.log(err.response.data);
-        })   
+            console.log(err);
+        })
+ 
 }
