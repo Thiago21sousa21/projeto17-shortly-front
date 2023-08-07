@@ -17,14 +17,12 @@ export function HomePage() {
     const localToken = localStorage.getItem('localToken');
     const localConfig = {headers:{authorization:`Bearer ${localToken}`}}
 
-
          
     if(localToken){
         useEffect(() => { 
             getMyUrls(setMyUrls);
         }, []);      
     }
-  
     
     const toShorten = (e) => {
         e.preventDefault();

@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 export function HeaderOn(){
     const navigate = useNavigate();
     const toExit = ()=>{
-        localStorage.setItem('localToken','');
+        localStorage.removeItem('localToken');
         navigate('/');
     }
     
