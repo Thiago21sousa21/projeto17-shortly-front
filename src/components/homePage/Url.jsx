@@ -27,7 +27,7 @@ export function Url(props) {
     return (
         <CsUrl>
             
-                <a className="titlesUrls"  href={`${import.meta.env.VITE_API_URL}/urls/open/${shortUrl}`} target="_blank" onClick={()=>getMyUrls(setMyUrls)}>
+                <a className="titlesUrls" onClick={()=>getMyUrls(setMyUrls)} href={`${import.meta.env.VITE_API_URL}/urls/open/${shortUrl}`} target="_blank" >
                     <p className="shorten">{url}</p>
                     <p className="short">{shortUrl}</p>
                     <p className="visits">Quantidade de visitantes: {visitCount}</p>
@@ -69,6 +69,10 @@ const CsUrl = styled.div`
         text-decoration: none;
         color: white;
         overflow: hidden;
+
+        &:hover{
+            background-color: #33733f;
+        } 
         
     }
     .deleteUrl{
@@ -79,7 +83,10 @@ const CsUrl = styled.div`
         display: flex;
         //flex-direction: column;
         justify-content: center;
-        align-items: center;  
+        align-items: center;
+        &:hover{
+            background-color: #f5f5f5;
+        } 
     }
 
 `;

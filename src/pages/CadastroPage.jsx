@@ -86,6 +86,7 @@ const CsCadastroPage = styled.div`
             width: 25%;
             height: 17%;
             border-radius: 20px;
+            cursor: pointer;
         }
 
     }

@@ -1,21 +1,39 @@
 import { styled } from "styled-components";
-import  logo from './../assets/logoShortly.svg'
-import  trofeu from './../assets/trofeu.svg'
+import logo from './../assets/logoShortly.svg'
+import trofeu from './../assets/trofeu.svg'
 import { Header } from "../components/outPages/Header";
+import { useEffect, useState } from "react";
+import { getRanking } from "../utils/requestsUtils";
 
 
-export function RankingPage(){
-    
-    return(
+export function RankingPage() {
+    const [ranking, setRanking] = useState('carregando...');    
+    useEffect(()=>{
+        getRanking(setRanking); 
+    },[]);    
+    if(ranking === 'carregando...')return ranking;
+    console.log(ranking)
+
+    return (
         <CsRankingPage>
-            
-            <img className="logo" src={logo}/>
+
+            <img className="logo" src={logo} />
             <div className="containerMain">
                 <div className="titleRanking">
                     <img src={trofeu} />Ranking
                 </div>
                 <div className="playersRanking">
-                    <p>1. Fulaninha - 32 links - 1.000 visualizações</p>
+                    {ranking.map((player, idx) => {
+                        const { name, linksCount, visitCount, id } = player;
+                        if (Number(visitCount) !== 0) {
+                            return (
+                                <p key={id}>{idx + 1}. {name} - {linksCount}
+                                    {linksCount > 1 ? ' links' : ' link'} - {visitCount}
+                                    {visitCount > 1 ? ' visualizações' : ' visualização'}
+                                </p>
+                            );
+                        }
+                    })}
                 </div>
             </div>
         </CsRankingPage>

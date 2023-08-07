@@ -83,6 +83,7 @@ height: 90vh;
             width: 25%;
             height: 22%;
             border-radius: 20px;
+            cursor: pointer;
         }
 
     }
