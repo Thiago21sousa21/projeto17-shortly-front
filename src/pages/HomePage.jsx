@@ -6,19 +6,33 @@ import { useContext, useEffect, useState } from "react";
 import { Url } from "../components/homePage/Url";
 import axios from "axios";
 import { getMyUrls } from "../utils/requestsUtils";
+import { useNavigate } from "react-router-dom";
 
 
 export function HomePage() {
    
-    const {config, token, myUrls, setMyUrls  } = useContext(generalContext);
+    const {config, token, setToken,myUrls, setMyUrls  } = useContext(generalContext);
     const [inputUrl, setInputUrl] = useState({url:''});
+    const navigate = useNavigate();
+    const localToken = localStorage.getItem('localToken');
+    const localConfig = {headers:{authorization:`Bearer ${localToken}`}}
+
+
+         
+    if(localToken){
+        useEffect(() => { 
+            getMyUrls(setMyUrls);
+            if(!localToken)return navigate('/');
+        }, []);      
+    }
+  
     
     const toShorten = (e) => {
         e.preventDefault();
-        axios.post(`${import.meta.env.VITE_API_URL}/urls/shorten`, inputUrl, config)
+        axios.post(`${import.meta.env.VITE_API_URL}/urls/shorten`, inputUrl, localConfig)
             .then(res=>{
                 console.log(res);
-                getMyUrls(config, setMyUrls);
+                getMyUrls(setMyUrls);
                 setInputUrl({url:''})
             }).catch(err=>console.log(err));
 
@@ -28,10 +42,6 @@ export function HomePage() {
         const newValue = {...inputUrl, [id]: value};    
         setInputUrl(newValue);
     }
-
-    useEffect(() => {
-        getMyUrls(config, setMyUrls)
-    }, []);
 
     return (
         <CsHomePage>
@@ -60,7 +70,7 @@ export function HomePage() {
 
 const CsHomePage = styled.div`
 
-    border: 5px solid green;
+   // border: 5px solid green;
      height: 90vh;
     width: 100%;
     padding: 0 20% 10%;
@@ -68,6 +78,7 @@ const CsHomePage = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    
     .containerMain{
         //border: 1px solid ;
         padding: 15px;
@@ -109,6 +120,7 @@ const CsHomePage = styled.div`
                 color: white;
                 border:none;
                 border-radius: 12px;
+                cursor: pointer;
             }
         }
         .containerUrls{
@@ -121,5 +133,9 @@ const CsHomePage = styled.div`
             overflow-y: auto;
         }
 
+    }
+    .logo{
+        width: 20vw;
+        height: 20vh;
     }
 `;

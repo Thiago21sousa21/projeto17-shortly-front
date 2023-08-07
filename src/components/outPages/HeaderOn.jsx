@@ -3,12 +3,16 @@ import { styled } from "styled-components";
 
 export function HeaderOn(){
     const navigate = useNavigate();
+    const toExit = ()=>{
+        localStorage.setItem('localToken','');
+        navigate('/');
+    }
     
     return(
         <CsHeaderOn>            
             <div className="home" onClick={()=>navigate('/home')}>Home</div>
             <div className="ranking" onClick={()=>navigate('/ranking')}>Ranking</div>
-            <div className="sair" onClick={()=>navigate('/')}>Sair</div>
+            <div className="sair" onClick={toExit}>Sair</div>
         </CsHeaderOn>
     );
 }

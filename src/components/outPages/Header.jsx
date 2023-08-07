@@ -4,11 +4,11 @@ import { HeaderOff } from "./HeaderOff";
 
 export function Header(){
     const location = useLocation().pathname;
-    const on = '/home' || '/ranking'
+    const on = '/home' || '/ranking';
     
     return(
         <>
-             {location === on ? <HeaderOn/> : <HeaderOff/>}
+             {location === '/home' || location === '/ranking' ? <HeaderOn/> : <HeaderOff/>}
         </>
        
     );

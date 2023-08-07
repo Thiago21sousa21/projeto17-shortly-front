@@ -27,6 +27,7 @@ export const postFormLogin = (formLogin, navigate, context) => {
         .then(res=>{
             const {setToken} = context;
             setToken(res.data.token);
+            localStorage.setItem('localToken', res.data.token);
             navigate('/home');            
         })
         .catch(err=>{
@@ -35,9 +36,10 @@ export const postFormLogin = (formLogin, navigate, context) => {
  
 }
 
-export const getMyUrls = (config, setMyUrls) => {   
-
-    axios.get(`${import.meta.env.VITE_API_URL}/users/me`, config)
+export const getMyUrls = (setMyUrls) => {   
+    const localToken = localStorage.getItem('localToken');
+    const localConfig = {headers:{authorization:`Bearer ${localToken}`}}
+    axios.get(`${import.meta.env.VITE_API_URL}/users/me`, localConfig)
     .then(res => {
         setMyUrls(res.data.shortenedUrls)
     })

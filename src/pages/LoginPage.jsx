@@ -54,7 +54,6 @@ height: 90vh;
     align-items: center;
 
     .logo{
-        //border: 1px solid ;
         width: 20vw;
         height: 20vh;
     }

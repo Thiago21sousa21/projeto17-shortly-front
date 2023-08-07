@@ -51,9 +51,8 @@ const CsInitialPage = styled.div`
     align-items: center;
 
     .logo{
-        //border: 1px solid ;
-        width: 180px;
-        height: 60px;
+        width: 20vw;
+        height: 20vh;
     }
     .containerMain{
         //border: 1px solid ;

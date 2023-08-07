@@ -8,23 +8,26 @@ import { getMyUrls } from "../../utils/requestsUtils";
 export function Url(props) {
     const { convertion } = props;
     const { id, url, shortUrl, visitCount } = convertion;
-    const { config, setMyUrls } = useContext(generalContext);
+    const { config, setMyUrls} = useContext(generalContext);
+    const localToken = localStorage.getItem('localToken');
+    const localConfig = {headers:{authorization:`Bearer ${localToken}`}}
+
 
 
 
 
     const deleteUrl = () => {
-        axios.delete(`${import.meta.env.VITE_API_URL}/urls/${id}`, config)
+        axios.delete(`${import.meta.env.VITE_API_URL}/urls/${id}`, localConfig)
             .then(res => {
                 console.log(res);
-                getMyUrls(config, setMyUrls);
+                getMyUrls(setMyUrls);
             }).catch(err => console.log(err));
     }
 
     return (
         <CsUrl>
             
-                <a className="titlesUrls"  href={`${import.meta.env.VITE_API_URL}/urls/open/${shortUrl}`} target="_blank" onClick={()=>getMyUrls(config, setMyUrls)}>
+                <a className="titlesUrls"  href={`${import.meta.env.VITE_API_URL}/urls/open/${shortUrl}`} target="_blank" onClick={()=>getMyUrls(setMyUrls)}>
                     <p className="shorten">{url}</p>
                     <p className="short">{shortUrl}</p>
                     <p className="visits">Quantidade de visitantes: {visitCount}</p>
