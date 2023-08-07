@@ -18,11 +18,11 @@ export function HomePage() {
     const localConfig = {headers:{authorization:`Bearer ${localToken}`}}
 
          
-    if(localToken){
-        useEffect(() => { 
-            getMyUrls(setMyUrls);
-        }, []);      
-    }
+    useEffect(() => { 
+        getMyUrls(setMyUrls);
+        if(!localToken)return navigate('/');
+    }, [localToken, navigate, myUrls]);      
+    
     
     const toShorten = (e) => {
         e.preventDefault();

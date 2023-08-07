@@ -8,9 +8,12 @@ import { getRanking } from "../utils/requestsUtils";
 
 export function InitialPage(){
     const [ranking, setRanking] = useState('carregando...');
+
+
     useEffect(()=>{
-        getRanking(setRanking); 
-    },[]);    
+        getRanking(setRanking);
+    },[]);  
+
     if(ranking === 'carregando...')return ranking;
 
     return(

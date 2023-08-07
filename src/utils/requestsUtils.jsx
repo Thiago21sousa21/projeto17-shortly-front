@@ -36,7 +36,7 @@ export const postFormLogin = (formLogin, navigate, context) => {
  
 }
 
-export const getMyUrls = (setMyUrls, navigate) => {   
+export const getMyUrls = (setMyUrls) => {   
     const localToken = localStorage.getItem('localToken');
     const localConfig = {headers:{authorization:`Bearer ${localToken}`}}
     axios.get(`${import.meta.env.VITE_API_URL}/users/me`, localConfig)
