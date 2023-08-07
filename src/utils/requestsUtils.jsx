@@ -15,9 +15,11 @@ export const postNewClient = (formNewClient) => {
         axios.post(`${import.meta.env.VITE_API_URL}/signup`, formNewClient)
             .then(res=>{
                 console.log(res);
+                alert(res.data);
             })
             .catch(err=>{
                 console.log(err.response.data);
+                alert(err.response.data);
             })   
 }
 
@@ -32,6 +34,7 @@ export const postFormLogin = (formLogin, navigate, context) => {
         })
         .catch(err=>{
             console.log(err);
+            alert(err.response.data);
         })
  
 }
