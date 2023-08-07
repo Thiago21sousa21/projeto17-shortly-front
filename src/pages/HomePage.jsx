@@ -22,7 +22,6 @@ export function HomePage() {
     if(localToken){
         useEffect(() => { 
             getMyUrls(setMyUrls);
-            if(!localToken)return navigate('/');
         }, []);      
     }
   
